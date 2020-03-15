@@ -5,6 +5,7 @@
 import unittest
 import echo
 import subprocess
+import sys
 
 
 class TestEcho(unittest.TestCase):
@@ -15,15 +16,18 @@ class TestEcho(unittest.TestCase):
         This function is called only once for all tests.
         """
         self.parser = echo.create_parser()
-
+        self.pystring = "python2"
+        if sys.version_info[0] == 3:
+            self.pystring = "python3"
     # Help Test
+
     def test_help(self):
         """ Running the program without arguments should show usage. """
 
         # Run the command `python ./echo.py -h` in a separate process, then
         # collect it's output.
         process = subprocess.Popen(
-            ["python", "./echo.py", "-h", "--help"],
+            [self.pystring, "./echo.py", "-h", "--help"],
             stdout=subprocess.PIPE)
         stdout, _ = process.communicate()
         """
