@@ -26,6 +26,10 @@ class TestEcho(unittest.TestCase):
             ["python", "./echo.py", "-h", "--help"],
             stdout=subprocess.PIPE)
         stdout, _ = process.communicate()
+        """
+        makes it so it'll work on both python 2 and python3
+        """
+        stdout = stdout.decode("utf8")
         with open("./USAGE") as f:
             usage = f.read()
         self.assertEquals(stdout, usage)
