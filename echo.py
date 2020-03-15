@@ -6,6 +6,7 @@ __author__ = "Tiffany McLean"
 
 import argparse
 import sys
+import subprocess
 
 
 def create_parser():
@@ -17,8 +18,15 @@ def create_parser():
         "-l", "--lower", help="convert text to lowercase", action="store_true")
     parser.add_argument(
         "-t", "--title", help="convert text to titlecase", action="store_true")
+    # parser.add_argument(
+    #     "-h", "--help", help="show this help message and exit", action="store_true")
     parser.add_argument("text", help="text to be manipulated")
     return parser
+
+
+def func_no_args(text):
+    output = subprocess.check_output(['python', 'echo.py', text])
+    return output.rstrip()
 
 
 def main(args):
