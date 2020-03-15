@@ -26,8 +26,8 @@ class TestEcho(unittest.TestCase):
             ["python", "./echo.py", "-h", "--help"],
             stdout=subprocess.PIPE)
         stdout, _ = process.communicate()
-        usage = open("./USAGE", "r").read()
-
+        with open("./USAGE") as f:
+            usage = f.read()
         self.assertEquals(stdout, usage)
 
     def test_text(self):
